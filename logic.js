@@ -8,6 +8,11 @@ var angle;
 var resize;
 var depth;
 var startingRay;
+var updated;
+
+var angle_ = 1;
+var resize_ = 0.5;
+var startingRay_ = 200;
 
 const smallestRadius = 3;
 canvasContext.fillStyle = 'white';
@@ -15,22 +20,52 @@ canvasContext.fillRect(0,0, canvas.width, canvas.height);
 
 run();
 
+setInterval(updateCords, 700);
+setInterval(drawFractal,100);
+
+function updateInputs()
+{
+    angle_ = parseFloat(document.getElementById("angle").value);
+    
+    resize_ = document.getElementById("resize").value;
+    
+    startingRay_ = document.getElementById("radius").value;
+    
+    updated = true;
+}
+
+function updateCords()
+{
+    if(!updated)
+        return;
+    
+   /* cords = [];
+    angle = angle_;
+    resize = resize_;
+    depth = 10;
+    startingRay = startingRay_;
+    */
+    run();
+    clear();
+    updated = false;
+      
+}
+
+
 
 function run()
 {
     cords = [];
-    angle = 1;
-    resize = 0.5;
+    angle = angle_;
+    console.log(angle == angle_);
+    resize = resize_;
     depth = 10;
-    startingRay = 200;
+    startingRay = startingRay_;
     
     
     for(let i = 0; i < depth + 1; i++)
         cords.push([]);
-
     dfs(new Point(canvas.width/2,canvas.height/2), 1.5708, depth, startingRay);
-    //drawFractal();
-    setInterval(drawFractal,100);
 }
 
 function drawCircle(centerX,centerY,radius, color)
@@ -43,7 +78,7 @@ function drawCircle(centerX,centerY,radius, color)
 
 function randomiseColor()
 {
-    console.log( float2color(Math.random()));
+    //console.log( float2color(Math.random()));
     return '#' + float2color(Math.random()) + float2color(Math.random()) + float2color(Math.random());
 }
 
@@ -61,8 +96,16 @@ function Point (x, y)
     return this;
 }
 
+function clear()
+{
+    canvasContext.rect(0,0,canvas.width,canvas.height);
+    canvasContext.fillStyle = "white";
+    canvasContext.fill();
+}
+
 function drawFractal()
 {
+    
     for(let i = 0; i <= depth; i++)
     {
         
@@ -111,6 +154,7 @@ function dfs(point, direction, depth, r)
     cords[depth].push(point);
     
     dfs(left(point,direction,r),direction - angle, depth - 1, r * resize);
+    console.log((r * resize) + " : " + direction);
     
     dfs(right(point,direction,r),direction + angle, depth - 1, r * resize);
        
