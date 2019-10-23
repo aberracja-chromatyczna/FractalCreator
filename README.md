@@ -1,7 +1,7 @@
 # FractalCreator
 Generating Mickey Mouse head like looking fractal
 
-![alt text](https://raw.githubusercontent.com/tomsiemek/FractalCreator/master/fractal_example.png)
+[[https://raw.githubusercontent.com/tomsiemek/FractalCreator/master/fractal_example.png|alt=Should be image here :|]]
 # How to run?
 Just run the html file.
 # Epiletpic seizure warning
