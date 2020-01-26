@@ -1,33 +1,25 @@
 const canvas = document.getElementById("canvas");
 const canvasContext = canvas.getContext("2d");
 let cords;
-let angle;
-let resize;
+let angle = 0.75;
+let resize = 0.5;
 let depth;
-let startingRay;
+let startingRay = 200;
 let updated;
-
-let angle_ = 1;
-let resize_ = 0.5;
-let startingRay_ = 200;
-
 const smallestRadius = 3;
 canvasContext.fillStyle = 'white';
 canvasContext.fillRect(0, 0, canvas.width, canvas.height);
 updateCords();
-//setInterval(updateCords, 700);
-//setInterval(drawFractal, 100);
-
 function updateInputs() {
-    angle_ = parseFloat(document.getElementById("angle").value);
-    resize_ = document.getElementById("resize").value;
+    angle = parseFloat(document.getElementById("angle").value);
+    resize = document.getElementById("resize").value;
     updateCords();
 }
 function updateNumberInput() {
-    angle_ = parseFloat(document.getElementById("angle_slider").value);
-    resize_ = document.getElementById("resize_slider").value;
-    document.getElementById("angle").value = angle_
-    document.getElementById("resize").value = resize_
+    angle = parseFloat(document.getElementById("angle_slider").value);
+    resize = document.getElementById("resize_slider").value;
+    document.getElementById("angle").value = angle
+    document.getElementById("resize").value = resize
     updateInputs();
 }
 function updateCords() {
@@ -38,13 +30,10 @@ function updateCords() {
 
 function run() {
     cords = [];
-    angle = angle_;
-    resize = resize_;
     depth = 10;
-    startingRay = startingRay_;
     for (let i = 0; i < depth + 1; i++)
         cords.push([]);
-    dfs(new Point(canvas.width / 2, canvas.height * 2/3), 1.5708, depth, startingRay);
+    dfs(new Point(canvas.width / 2, canvas.height * 2 / 3), 1.5708, depth, startingRay);
 }
 
 function drawCircle(centerX, centerY, radius, color) {
@@ -55,7 +44,12 @@ function drawCircle(centerX, centerY, radius, color) {
 }
 
 function randomiseColor() {
-    return '#' + float2color(Math.random()) + float2color(Math.random()) + float2color(Math.random());
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 function float2color(percentage) {
