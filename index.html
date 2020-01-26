@@ -39,14 +39,21 @@
             align-items: center;
             margin-right: 10px;
         }
+
         input {
-            width:400px;
+            width: 400px;
             height: 30px;
             font-size: 28px;
         }
+
         p {
             margin-right: 10px;
             font-size: 20px;
+        }
+        .btn {
+            width: 300px;
+            height: 40px;
+            font-size: 28px;
         }
     </style>
 </head>
@@ -60,8 +67,10 @@
 
                 <div class="controls_container">
 
-                    <input type="range" id="angle_slider" value="0.75" step="0.05" min="0" max="1.5" oninput="updateNumberInput()">
-                    <input type="number" id="angle" value="0.75" step="0.05" min="0" max="1.5" onchange="updateInputs()">
+                    <input type="range" id="angle_slider" value="0.75" step="0.05" min="0" max="1.5"
+                        oninput="updateNumberInput()">
+                    <input type="number" id="angle" value="0.75" step="0.05" min="0" max="1.5"
+                        onchange="updateInputs()">
                 </div class="controls_container">
             </div>
 
@@ -71,9 +80,15 @@
             <div class="inba-wrapper">
                 <p>Resize multiplier:</p>
                 <div class="controls_container">
-                    <input type="range" id="resize_slider" value="0.5" step="0.05" min="0" max="1" oninput="updateNumberInput()">
+                    <input type="range" id="resize_slider" value="0.5" step="0.05" min="0" max="1"
+                        oninput="updateNumberInput()">
                     <input type="number" id="resize" value="0.5" step="0.05" min="0" max="1" onchange="updateInputs()">
                 </div>
+            </div>
+        </div>
+        <div class="input_container">
+            <div class="inba-wrapper">
+                <button id="change_colors" class="btn" onclick="restartColors()">RESET COLORS</button>
             </div>
         </div>
     </div>

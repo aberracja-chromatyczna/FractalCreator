@@ -1,15 +1,27 @@
 const canvas = document.getElementById("canvas");
 const canvasContext = canvas.getContext("2d");
 let cords;
+let colors;
 let angle = 0.75;
 let resize = 0.5;
 let depth;
 let startingRay = 200;
 let updated;
+let id;
+const COLOR_ARRAY_LENGTH = 1024;
 const smallestRadius = 3;
 canvasContext.fillStyle = 'white';
 canvasContext.fillRect(0, 0, canvas.width, canvas.height);
+generateColorArray();
 updateCords();
+
+function generateColorArray() {
+    colors = Array.from({length: COLOR_ARRAY_LENGTH}, () => randomiseColor())
+}
+function restartColors() {
+    generateColorArray();
+    updateCords();
+}
 function updateInputs() {
     angle = parseFloat(document.getElementById("angle").value);
     resize = document.getElementById("resize").value;
@@ -30,6 +42,7 @@ function updateCords() {
 
 function run() {
     cords = [];
+    id = 0;
     depth = 10;
     for (let i = 0; i < depth + 1; i++)
         cords.push([]);
@@ -61,6 +74,7 @@ function float2color(percentage) {
 function Point(x, y) {
     this.x = x;
     this.y = y;
+    this.id = id++;
     return this;
 }
 
@@ -69,11 +83,14 @@ function clear() {
     canvasContext.fillStyle = "white";
     canvasContext.fill();
 }
-
+function getColor(counter) {
+    return colors[counter % COLOR_ARRAY_LENGTH];
+}
 function drawFractal() {
+    
     for (let i = 0; i <= depth; i++) {
         for (let j = 0; j < cords[i].length; j++) {
-            drawCircle(cords[i][j].x, cords[i][j].y, parseInt(startingRay * Math.pow(resize, (depth - i))), randomiseColor());
+            drawCircle(cords[i][j].x, cords[i][j].y, parseInt(startingRay * Math.pow(resize, (depth - i))), getColor(cords[i][j].id));
         }
     }
 }
