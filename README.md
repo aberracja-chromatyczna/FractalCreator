@@ -5,5 +5,5 @@ Generating Mickey Mouse head like looking fractal
 # How to run?
 Just run the html file.
 or checkout https://tomsiemek.github.io/FractalCreator/
-# Epiletpic seizure warning
-Many flashy colors running around. Be careful!
+
+Change variables with sliders to change the output.
