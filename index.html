@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+     <html>
+         <head>
+             <title>
+                 fractal
+             </title>
+             <style> 
+                input {
+                    width: 5%;
+                }
+             </style>
+         </head>
+         <body>
+             <div id="inputs_div" align="center" >
+                Angle: <input type="Number" id="angle" value="1" onchange="updateInputs()">
+                Resize: <input type="Number" id="resize" value="0.5" onchange="updateInputs()">
+                startingRadius: <input type="Number" id="radius" value="200" onchange="updateInputs()"><br>        
+             </div>
+             <div id="canvas_div" align = "center"><canvas id = "canvas" width="1024" height="768"  align="center"></canvas></div>
+             <script src = "logic.js"></script>
+         </body>
+     </html>
